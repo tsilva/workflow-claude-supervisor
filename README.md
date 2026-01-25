@@ -71,7 +71,7 @@ High-priority projects get lower numbers for faster access.
 
 ## Components
 
-This workflow combines two tools, each solving a specific problem:
+This workflow combines three tools, each solving a specific problem:
 
 ### 🪟 Window Management — AeroSpace
 
@@ -96,6 +96,21 @@ This workflow combines two tools, each solving a specific problem:
 - Alerts when permission is needed
 - Click notification to focus the correct window (even across workspaces)
 - Zero configuration required
+
+### 📚 Skills — claude-skills
+
+**Problem:** Keeping documentation consistent across multiple repos is tedious.
+
+**Solution:** [claude-skills](https://github.com/anthropics/claude-skills) provides reusable skills like `readme-generator` that Claude Code can invoke across any project.
+
+**Key features:**
+- `/readme-generator` creates or updates READMEs following best practices
+- `/repo-logo-generator` generates project logos with transparent backgrounds
+- Skills work identically across all your supervised instances
+- Consistent documentation quality without manual effort
+
+**Workflow integration:**
+As you switch between projects, use `/readme-generator` to keep each repo's documentation current. The supervisor pattern isn't just about code — it's about maintaining healthy projects across the board.
 
 ## Quick Start
 
@@ -165,6 +180,7 @@ Projects listed first get lower workspace numbers.
 ## Related
 
 - [claude-code-notify](https://github.com/tsilva/claude-code-notify) — Notifications for Claude Code
+- [claude-skills](https://github.com/anthropics/claude-skills) — Reusable skills for Claude Code
 - [AeroSpace](https://github.com/nikitabobko/AeroSpace) — Tiling window manager for macOS
 
 ## License
