@@ -1,0 +1,92 @@
+# AeroSpace Configuration for Multi-Instance Claude Code Workflow
+# =================================================================
+# This configuration enables efficient window management for running
+# multiple Claude Code instances in Cursor, each in its own workspace.
+#
+# Key concepts:
+# - One window per workspace (fullscreen-like experience)
+# - Alt+1-9 to switch between workspaces instantly
+# - Alt+C to auto-arrange Cursor windows by project priority
+
+# Start AeroSpace automatically on login
+start-at-login = true
+after-startup-command = []
+
+# Remove all gaps between windows for a clean fullscreen look
+# Each workspace shows one maximized window
+[gaps]
+inner.horizontal = 0
+inner.vertical = 0
+outer.left = 0
+outer.bottom = 0
+outer.top = 0
+outer.right = 0
+
+# -----------------------------------------------------------------------------
+# Keybindings
+# -----------------------------------------------------------------------------
+[mode.main.binding]
+
+# Switch to workspace 1-9 with Alt+Number
+# Each workspace can hold one Claude Code instance
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+
+# Move current window to workspace 1-9 with Alt+Shift+Number
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+
+# Navigate between workspaces sequentially
+alt-right = 'workspace next'
+alt-left = 'workspace prev'
+
+# Auto-arrange Cursor windows by project priority
+# Press Alt+C after opening Cursor windows to distribute them across workspaces
+alt-c = 'exec-and-forget ~/.aerospace-fix-cursor.sh'
+
+# Toggle fullscreen mode for current window
+alt-f = 'fullscreen'
+
+# -----------------------------------------------------------------------------
+# Auto-assign apps to workspaces
+# -----------------------------------------------------------------------------
+# Workspace 1 is reserved for browsers, notes, and chat apps
+# Workspaces 2-9 are for Cursor/Claude Code instances
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'com.openai.chat'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Sublime Text'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'WhatsApp'
+run = 'move-node-to-workspace 1'

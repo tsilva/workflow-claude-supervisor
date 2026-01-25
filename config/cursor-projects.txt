@@ -1,0 +1,17 @@
+# Cursor Project Priority List
+# ============================
+# List your project directory names in priority order (one per line).
+# When you press Alt+C, Cursor windows are arranged across workspaces
+# starting at workspace 2, following this order.
+#
+# Projects listed first get lower workspace numbers for faster access.
+# Any Cursor windows not matching these names are placed in subsequent workspaces.
+#
+# Example:
+my-main-project
+api-backend
+web-frontend
+mobile-app
+shared-library
+docs-site
+experimental
