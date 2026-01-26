@@ -112,6 +112,21 @@ This workflow combines three tools, each solving a specific problem:
 **Workflow integration:**
 As you switch between projects, use `/readme-generator` to keep each repo's documentation current. The supervisor pattern isn't just about code — it's about maintaining healthy projects across the board.
 
+### 🔒 Sandboxed Execution — claude-sandbox
+
+**Problem:** Permission prompts interrupt your workflow, requiring constant attention.
+
+**Solution:** [claude-sandbox](https://github.com/tsilva/claude-sandbox) runs Claude Code with full autonomy inside an isolated container — no permission prompts, no risk to your system.
+
+**Key features:**
+- Full autonomy — Claude can install packages, run commands, modify files without prompts
+- Complete isolation — Container has no access to your host system except mounted project
+- Same-path mounting — File paths work identically inside and outside the container
+- Per-project config — Mount additional data directories via `.claude-sandbox.json`
+
+**Workflow integration:**
+Run `claude-sandbox` instead of `claude` in your project directory. Combined with the supervisor pattern, you can delegate tasks and switch away knowing Claude will work autonomously until completion — no prompts pulling you back.
+
 ## Quick Start
 
 ### Install Window Management
@@ -131,6 +146,18 @@ git clone https://github.com/tsilva/claude-code-notify.git
 cd claude-code-notify
 ./install.sh
 ```
+
+### Install Sandboxed Execution (Optional)
+
+```bash
+git clone https://github.com/tsilva/claude-sandbox.git
+cd claude-sandbox
+./docker/install.sh
+source ~/.zshrc
+claude-sandbox login  # One-time authentication
+```
+
+Then use `claude-sandbox` instead of `claude` in any project.
 
 ### Start Supervising
 
@@ -180,6 +207,7 @@ Projects listed first get lower workspace numbers.
 ## Related
 
 - [claude-code-notify](https://github.com/tsilva/claude-code-notify) — Notifications for Claude Code
+- [claude-sandbox](https://github.com/tsilva/claude-sandbox) — Isolated execution environment for Claude Code
 - [claude-skills](https://github.com/anthropics/claude-skills) — Reusable skills for Claude Code
 - [AeroSpace](https://github.com/nikitabobko/AeroSpace) — Tiling window manager for macOS
 
