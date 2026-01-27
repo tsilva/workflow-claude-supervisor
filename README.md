@@ -130,6 +130,21 @@ As you supervise multiple projects, use these skills to maintain consistency and
 **Workflow integration:**
 Run `claude-sandbox` instead of `claude` in your project directory. Combined with the supervisor pattern, you can delegate tasks and switch away knowing Claude will work autonomously until completion — no prompts pulling you back.
 
+### API Bridge — claude-code-bridge
+
+**Problem:** OpenRouter and other API providers charge per-token, making Opus 4.5 expensive for heavy usage.
+
+**Solution:** [claude-code-bridge](https://github.com/tsilva/claude-code-bridge) creates an OpenAI-compatible API server that bridges to your Claude Max subscription — use Opus 4.5 at subscription cost instead of per-token pricing.
+
+**Key features:**
+- OpenAI-compatible — Drop-in replacement for `/v1/chat/completions` endpoint
+- Uses Claude Max subscription — No separate API keys needed
+- Streaming support — Server-Sent Events matching OpenAI's format
+- Minimal footprint — ~200 lines of Python, few dependencies
+
+**Workflow integration:**
+For projects using OpenRouter or other OpenAI-compatible APIs, point them to `http://localhost:8000` instead. This lets you use Opus 4.5 at your subscription rate rather than per-token pricing — significant savings for heavy workflows.
+
 ## How It Works Together
 
 The components integrate seamlessly to create a smooth supervisor experience:
@@ -175,7 +190,17 @@ claude-sandbox login  # One-time authentication
 
 Then use `claude-sandbox` instead of `claude` in any project.
 
-### 4. Start Supervising
+### 4. Install API Bridge (Optional)
+
+```bash
+uv tool install git+https://github.com/tsilva/claude-code-bridge
+claude login  # If not already authenticated
+claude-code-bridge  # Start the server
+```
+
+Point OpenRouter-based tools to `http://localhost:8000` for cheaper Opus 4.5 access.
+
+### 5. Start Supervising
 
 1. Open Cursor/VS Code windows for each project
 2. Press `Alt+C` to auto-arrange them across workspaces
@@ -217,6 +242,7 @@ Projects listed first get lower workspace numbers. See [aerospace-setup](https:/
 - [aerospace-setup](https://github.com/tsilva/aerospace-setup) — AeroSpace configuration for the supervisor workflow
 - [claude-code-notify](https://github.com/tsilva/claude-code-notify) — Notifications for Claude Code
 - [claude-sandbox](https://github.com/tsilva/claude-sandbox) — Isolated execution environment for Claude Code
+- [claude-code-bridge](https://github.com/tsilva/claude-code-bridge) — OpenAI-compatible API bridge for Claude Max subscriptions
 - [claude-skills](https://github.com/tsilva/claude-skills) — Reusable skills for Claude Code
 - [AeroSpace](https://github.com/nikitabobko/AeroSpace) — Tiling window manager for macOS
 

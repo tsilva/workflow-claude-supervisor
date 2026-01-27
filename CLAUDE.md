@@ -8,6 +8,7 @@ All code artifacts (scripts, configurations) live in the component repositories:
 - [aerospace-setup](https://github.com/tsilva/aerospace-setup) — Window management configuration
 - [claude-code-notify](https://github.com/tsilva/claude-code-notify) — Notification system
 - [claude-sandbox](https://github.com/tsilva/claude-sandbox) — Sandboxed execution
+- [claude-code-bridge](https://github.com/tsilva/claude-code-bridge) — API bridge for Claude Max
 
 ## File Organization
 
@@ -24,6 +25,7 @@ workflow-claude-supervisor/
 - [aerospace-setup](https://github.com/tsilva/aerospace-setup): AeroSpace configuration with workspaces and keybindings
 - [claude-code-notify](https://github.com/tsilva/claude-code-notify): Notification system for Claude Code task completion
 - [claude-sandbox](https://github.com/tsilva/claude-sandbox): Isolated Docker environment for autonomous Claude Code execution
+- [claude-code-bridge](https://github.com/tsilva/claude-code-bridge): OpenAI-compatible API server for Claude Max subscriptions
 
 ## Documentation Generation
 
