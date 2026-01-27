@@ -27,12 +27,14 @@ workflow-claude-supervisor/
 
 ## Documentation Generation
 
-This project uses [claude-skills](https://github.com/anthropics/claude-skills) for documentation:
+This project uses [claude-skills](https://github.com/tsilva/claude-skills) for documentation and workflow automation:
 
-- **readme-generator** skill: Creates and updates README.md following best practices
-- **repo-logo-generator** skill: Generates project logos with transparent backgrounds
+- **project-readme-author** skill: Creates and updates README.md following best practices
+- **project-logo-author** skill: Generates project logos with transparent backgrounds
+- **claude-skill-author** skill: Creates project skills for repeated Claude tasks
+- **mcp-author** skill: Bootstraps MCP servers for repeated workflows
 
-To regenerate documentation, use the `/readme-generator` skill command.
+To regenerate documentation, use the `/project-readme-author` skill command.
 
 ## Important Notes
 

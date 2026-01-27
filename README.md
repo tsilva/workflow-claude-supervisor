@@ -98,18 +98,22 @@ This workflow combines several tools, each solving a specific problem:
 
 ### Skills — claude-skills
 
-**Problem:** Keeping documentation consistent across multiple repos is tedious.
+**Problem:** Repeated documentation, development, and workflow tasks across repos are tedious and inconsistent.
 
-**Solution:** [claude-skills](https://github.com/anthropics/claude-skills) provides reusable skills like `readme-generator` that Claude Code can invoke across any project.
+**Solution:** [claude-skills](https://github.com/tsilva/claude-skills) provides reusable skills that Claude Code can invoke across any project.
 
 **Key features:**
-- `/readme-generator` creates or updates READMEs following best practices
-- `/repo-logo-generator` generates project logos with transparent backgrounds
-- Skills work identically across all your supervised instances
-- Consistent documentation quality without manual effort
+- `/project-readme-author` — Creates or updates READMEs following best practices
+- `/project-logo-author` — Generates project logos with transparent backgrounds
+- `/claude-skill-author` — Creates project skills for repeated Claude tasks, making future runs more efficient and deterministic
+- `/mcp-author` — Bootstraps MCP servers for repeated workflows that can be encapsulated as tools
 
 **Workflow integration:**
-As you switch between projects, use `/readme-generator` to keep each repo's documentation current. The supervisor pattern isn't just about code — it's about maintaining healthy projects across the board.
+As you supervise multiple projects, use these skills to maintain consistency and automate repeated patterns:
+- Keep documentation current with `/project-readme-author`
+- Generate professional logos with `/project-logo-author`
+- When you identify a repeated task on a project, use `/claude-skill-author` to create a skill so future runs are more efficient
+- When you identify a repeated workflow that could be a tool, use `/mcp-author` to create an MCP server
 
 ### Sandboxed Execution — claude-sandbox
 
@@ -213,7 +217,7 @@ Projects listed first get lower workspace numbers. See [aerospace-setup](https:/
 - [aerospace-setup](https://github.com/tsilva/aerospace-setup) — AeroSpace configuration for the supervisor workflow
 - [claude-code-notify](https://github.com/tsilva/claude-code-notify) — Notifications for Claude Code
 - [claude-sandbox](https://github.com/tsilva/claude-sandbox) — Isolated execution environment for Claude Code
-- [claude-skills](https://github.com/anthropics/claude-skills) — Reusable skills for Claude Code
+- [claude-skills](https://github.com/tsilva/claude-skills) — Reusable skills for Claude Code
 - [AeroSpace](https://github.com/nikitabobko/AeroSpace) — Tiling window manager for macOS
 
 ## License
