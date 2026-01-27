@@ -5,10 +5,9 @@
 
 [![macOS](https://img.shields.io/badge/macOS-000000?logo=apple&logoColor=white)](https://www.apple.com/macos/)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Anthropic-orange)](https://claude.ai/code)
-[![AeroSpace](https://img.shields.io/badge/AeroSpace-Window_Manager-blue)](https://github.com/nikitabobko/AeroSpace)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**🧙‍♂️ Supervise multiple Claude Code instances in parallel — switch contexts instantly, get notified when tasks complete, stay in control**
+**Supervise multiple Claude Code instances in parallel — switch contexts instantly, get notified when tasks complete, stay in control**
 
 [Quick Start](#quick-start) · [The Workflow](#the-workflow) · [Components](#components)
 
@@ -31,7 +30,7 @@ Instead of babysitting one session, you delegate tasks, switch away, and return 
 
 ```mermaid
 graph LR
-    subgraph You["🧙 You (Supervisor)"]
+    subgraph You["You (Supervisor)"]
         Review["Review & Direct"]
     end
 
@@ -45,9 +44,9 @@ graph LR
     Review -->|"Alt+3"| A2
     Review -->|"Alt+4"| A3
 
-    A1 -->|"🔔 Done!"| Review
-    A2 -->|"🔔 Needs input"| Review
-    A3 -->|"⏳ Working..."| Review
+    A1 -->|"Done!"| Review
+    A2 -->|"Needs input"| Review
+    A3 -->|"Working..."| Review
 ```
 
 ### The Supervisor Pattern
@@ -71,13 +70,13 @@ High-priority projects get lower numbers for faster access.
 
 ## Components
 
-This workflow combines three tools, each solving a specific problem:
+This workflow combines several tools, each solving a specific problem:
 
-### 🪟 Window Management — AeroSpace
+### Window Management — aerospace-setup
 
 **Problem:** macOS has no native way to instantly switch between fullscreen app instances.
 
-**Solution:** [AeroSpace](https://github.com/nikitabobko/AeroSpace) provides workspaces with instant keyboard navigation.
+**Solution:** [aerospace-setup](https://github.com/tsilva/aerospace-setup) provides AeroSpace configuration with workspaces and instant keyboard navigation.
 
 **Key features:**
 - Alt+1-9 switches workspaces in milliseconds
@@ -85,7 +84,7 @@ This workflow combines three tools, each solving a specific problem:
 - Auto-arrange script organizes windows by project priority
 - Zero gaps, zero animations, zero distractions
 
-### 🔔 Notifications — claude-code-notify
+### Notifications — claude-code-notify
 
 **Problem:** You can't watch every Claude Code instance simultaneously.
 
@@ -97,7 +96,7 @@ This workflow combines three tools, each solving a specific problem:
 - Click notification to focus the correct window (even across workspaces)
 - Zero configuration required
 
-### 📚 Skills — claude-skills
+### Skills — claude-skills
 
 **Problem:** Keeping documentation consistent across multiple repos is tedious.
 
@@ -112,7 +111,7 @@ This workflow combines three tools, each solving a specific problem:
 **Workflow integration:**
 As you switch between projects, use `/readme-generator` to keep each repo's documentation current. The supervisor pattern isn't just about code — it's about maintaining healthy projects across the board.
 
-### 🔒 Sandboxed Execution — claude-sandbox
+### Sandboxed Execution — claude-sandbox
 
 **Problem:** Permission prompts interrupt your workflow, requiring constant attention.
 
@@ -127,19 +126,30 @@ As you switch between projects, use `/readme-generator` to keep each repo's docu
 **Workflow integration:**
 Run `claude-sandbox` instead of `claude` in your project directory. Combined with the supervisor pattern, you can delegate tasks and switch away knowing Claude will work autonomously until completion — no prompts pulling you back.
 
+## How It Works Together
+
+The components integrate seamlessly to create a smooth supervisor experience:
+
+1. **aerospace-setup** provides the workspace infrastructure — each Claude Code instance lives in its own dedicated workspace with instant keyboard switching
+2. **claude-code-notify** hooks into Claude Code events and sends desktop notifications when tasks complete or need input
+3. **Clicking a notification** invokes the `focus-window.sh` script from aerospace-setup, which switches to the correct workspace and focuses the window
+4. **claude-sandbox** (optional) eliminates permission prompts, letting Claude work autonomously until completion
+
+This integration means you can delegate a task, switch to another project, and be automatically brought back when Claude needs you — all without losing context or hunting for windows.
+
 ## Quick Start
 
-### Install Window Management
+### 1. Install Window Management
 
 ```bash
-git clone https://github.com/tsilva/workflow-claude-supervisor.git
-cd workflow-claude-supervisor
+git clone https://github.com/tsilva/aerospace-setup.git
+cd aerospace-setup
 ./install.sh
 ```
 
-This installs AeroSpace and configures workspaces.
+This installs AeroSpace and configures workspaces with keyboard shortcuts.
 
-### Install Notifications
+### 2. Install Notifications
 
 ```bash
 git clone https://github.com/tsilva/claude-code-notify.git
@@ -147,7 +157,9 @@ cd claude-code-notify
 ./install.sh
 ```
 
-### Install Sandboxed Execution (Optional)
+This installs Claude Code hooks for desktop notifications.
+
+### 3. Install Sandboxed Execution (Optional)
 
 ```bash
 git clone https://github.com/tsilva/claude-sandbox.git
@@ -159,7 +171,7 @@ claude-sandbox login  # One-time authentication
 
 Then use `claude-sandbox` instead of `claude` in any project.
 
-### Start Supervising
+### 4. Start Supervising
 
 1. Open Cursor/VS Code windows for each project
 2. Press `Alt+C` to auto-arrange them across workspaces
@@ -178,15 +190,7 @@ api-backend          # Gets Alt+3
 web-frontend         # Gets Alt+4
 ```
 
-Projects listed first get lower workspace numbers.
-
-### Configuration Files
-
-| File | Purpose |
-|------|---------|
-| `~/.aerospace.toml` | AeroSpace keybindings and settings |
-| `~/.config/aerospace/cursor-projects.txt` | Project priority list |
-| `~/.aerospace-fix-cursor.sh` | Auto-arrange script |
+Projects listed first get lower workspace numbers. See [aerospace-setup](https://github.com/tsilva/aerospace-setup) for detailed configuration options.
 
 ## Keybindings
 
@@ -206,6 +210,7 @@ Projects listed first get lower workspace numbers.
 
 ## Related
 
+- [aerospace-setup](https://github.com/tsilva/aerospace-setup) — AeroSpace configuration for the supervisor workflow
 - [claude-code-notify](https://github.com/tsilva/claude-code-notify) — Notifications for Claude Code
 - [claude-sandbox](https://github.com/tsilva/claude-sandbox) — Isolated execution environment for Claude Code
 - [claude-skills](https://github.com/anthropics/claude-skills) — Reusable skills for Claude Code
