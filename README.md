@@ -13,6 +13,8 @@
 
 </div>
 
+> **New to Claude Code?** [Claude Code](https://docs.anthropic.com/en/docs/claude-code) is Anthropic's official CLI for Claude. It runs inside your terminal — typically the integrated terminal in Cursor or VS Code — and lets you interact with Claude directly in your development environment.
+
 ## Overview
 
 Running one Claude Code session is straightforward. Running *several* in parallel — each working on a different project — quickly becomes chaos. Which task finished? Which window was that? Where did I leave off?
@@ -59,12 +61,23 @@ graph LR
 
 This turns waiting time into productive time. While Claude thinks through a complex refactor in Project A, you're reviewing changes in Project B and delegating tests in Project C.
 
+### What Are Workspaces?
+
+Workspaces are virtual desktops managed by [AeroSpace](https://github.com/nikitabobko/AeroSpace), a tiling window manager for macOS. They're similar to macOS Spaces but with key differences:
+
+- **Instant switching** — No slide animations; workspaces change immediately
+- **Keyboard-driven** — Alt+1 through Alt+9 switches directly to any workspace
+- **One app per workspace** — Each Claude Code instance gets its own dedicated space
+- **Fullscreen by default** — Every window is maximized, zero distractions
+
+This is what makes the supervisor pattern practical — switching between projects takes milliseconds, not seconds.
+
 ### Workspace Layout
 
 | Workspace | Keybinding | Purpose |
 |-----------|------------|---------|
 | 1 | `Alt+1` | Browser, notes, documentation |
-| 2-9 | `Alt+2` - `Alt+9` | One Claude Code instance per workspace |
+| 2-9 | `Alt+2` - `Alt+9` | One Cursor/VS Code window per workspace (each running Claude Code) |
 
 High-priority projects get lower numbers for faster access.
 
@@ -101,6 +114,16 @@ This workflow combines several tools, each solving a specific problem:
 **Problem:** Repeated documentation, development, and workflow tasks across repos are tedious and inconsistent.
 
 **Solution:** [claude-skills](https://github.com/tsilva/claude-skills) provides reusable skills that Claude Code can invoke across any project.
+
+**Installation:**
+
+```bash
+git clone https://github.com/tsilva/claude-skills.git
+cd claude-skills
+./install.sh
+```
+
+After installation, restart Claude Code. Skills are invoked by typing the skill name as a slash command (e.g., `/project-readme-author`).
 
 **Key features:**
 - `/project-readme-author` — Creates or updates READMEs following best practices
@@ -151,12 +174,14 @@ The components integrate seamlessly to create a smooth supervisor experience:
 
 1. **aerospace-setup** provides the workspace infrastructure — each Claude Code instance lives in its own dedicated workspace with instant keyboard switching
 2. **claude-code-notify** hooks into Claude Code events and sends desktop notifications when tasks complete or need input
-3. **Clicking a notification** invokes the `focus-window.sh` script from aerospace-setup, which switches to the correct workspace and focuses the window
+3. **Clicking a notification** automatically switches to the correct workspace and focuses the window — no manual navigation needed
 4. **claude-sandbox** (optional) eliminates permission prompts, letting Claude work autonomously until completion
 
 This integration means you can delegate a task, switch to another project, and be automatically brought back when Claude needs you — all without losing context or hunting for windows.
 
 ## Quick Start
+
+The core workflow requires only two components: window management and notifications.
 
 ### 1. Install Window Management
 
@@ -178,7 +203,20 @@ cd claude-code-notify
 
 This installs Claude Code hooks for desktop notifications.
 
-### 3. Install Sandboxed Execution (Optional)
+### 3. Start Supervising
+
+1. Open Cursor/VS Code windows for each project you want to work on
+2. Press `Alt+C` to auto-arrange Cursor windows across workspaces (one per workspace)
+3. Use `Alt+1-9` to switch instantly between projects
+4. Get notified when Claude completes tasks — click the notification to jump back
+
+## Optional Enhancements
+
+These components extend the workflow for specific use cases.
+
+### Sandboxed Execution
+
+Run Claude Code with full autonomy — no permission prompts. Useful when you want Claude to work completely autonomously on isolated tasks.
 
 ```bash
 git clone https://github.com/tsilva/claude-sandbox.git
@@ -188,9 +226,11 @@ source ~/.zshrc
 claude-sandbox login  # One-time authentication
 ```
 
-Then use `claude-sandbox` instead of `claude` in any project.
+Then use `claude-sandbox` instead of `claude` in any project. See [claude-sandbox](https://github.com/tsilva/claude-sandbox) for details.
 
-### 4. Install API Bridge (Optional)
+### API Bridge for Claude Max
+
+Use your Claude Max subscription instead of per-token API pricing. Useful if you have a Claude Max subscription and want to use Opus 4.5 without per-token costs.
 
 ```bash
 uv tool install git+https://github.com/tsilva/claude-code-bridge
@@ -198,14 +238,7 @@ claude login  # If not already authenticated
 claude-code-bridge  # Start the server
 ```
 
-Point OpenRouter-based tools to `http://localhost:8000` for cheaper Opus 4.5 access.
-
-### 5. Start Supervising
-
-1. Open Cursor/VS Code windows for each project
-2. Press `Alt+C` to auto-arrange them across workspaces
-3. Use `Alt+1-9` to switch between projects
-4. Get notified when Claude completes tasks
+Point OpenRouter-based tools to `http://localhost:8000`. See [claude-code-bridge](https://github.com/tsilva/claude-code-bridge) for details.
 
 ## Configuration
 
@@ -227,15 +260,18 @@ Projects listed first get lower workspace numbers. See [aerospace-setup](https:/
 |------------|--------|
 | `Alt+1` - `Alt+9` | Switch to workspace |
 | `Alt+Shift+1` - `Alt+Shift+9` | Move window to workspace |
-| `Alt+C` | Auto-arrange Cursor windows by priority |
+| `Alt+C` | Auto-arrange Cursor windows by priority (Cursor-specific) |
 | `Alt+F` | Toggle fullscreen |
 | `Alt+Left` / `Alt+Right` | Navigate to adjacent workspace |
 
+> **Note:** `Alt+C` specifically arranges Cursor windows. If you use VS Code instead, see [aerospace-setup](https://github.com/tsilva/aerospace-setup) for configuration options.
+
 ## Requirements
 
-- macOS
-- [Homebrew](https://brew.sh)
-- [Cursor](https://cursor.sh) or VS Code with Claude Code extension
+- **macOS** — AeroSpace only runs on macOS
+- **[Homebrew](https://brew.sh)** — For installing AeroSpace and dependencies
+- **[Claude Code](https://docs.anthropic.com/en/docs/claude-code)** — Anthropic's CLI for Claude
+- **[Cursor](https://cursor.sh) or VS Code** — As your editor (Claude Code runs in the integrated terminal)
 
 ## Related
 
