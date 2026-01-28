@@ -115,16 +115,6 @@ This workflow combines several tools, each solving a specific problem:
 
 **Solution:** [claude-skills](https://github.com/tsilva/claude-skills) provides reusable skills that Claude Code can invoke across any project.
 
-**Installation:**
-
-```bash
-git clone https://github.com/tsilva/claude-skills.git
-cd claude-skills
-./install.sh
-```
-
-After installation, restart Claude Code. Skills are invoked by typing the skill name as a slash command (e.g., `/project-readme-author`).
-
 **Key features:**
 - `/project-readme-author` — Creates or updates READMEs following best practices
 - `/project-logo-author` — Generates project logos with transparent backgrounds
@@ -152,6 +142,21 @@ As you supervise multiple projects, use these skills to maintain consistency and
 
 **Workflow integration:**
 Run `claude-sandbox` instead of `claude` in your project directory. Combined with the supervisor pattern, you can delegate tasks and switch away knowing Claude will work autonomously until completion — no prompts pulling you back.
+
+### Idea Capture — capture
+
+**Problem:** While supervising multiple projects, random thoughts interrupt your focus — ideas, reminders, tasks unrelated to the current work. Writing them down breaks flow; ignoring them risks forgetting.
+
+**Solution:** [capture](https://github.com/tsilva/capture) sends thoughts to Gmail instantly via a single command or hotkey. Dump the idea, stay focused, process later.
+
+**Key features:**
+- Instant capture — Send notes to Gmail in under 2 seconds
+- Multiple targets — Route messages to different inboxes (home, work)
+- Hotkey ready — Alfred (macOS) integration for keyboard-triggered capture
+- GTD methodology — Implements the "capture everything, process later" pattern
+
+**Workflow integration:**
+Bind `capture` to a global hotkey (e.g., `Cmd+Shift+I` via Alfred). When a random thought hits while supervising Claude instances — a grocery item, a feature idea for another project, a reminder — press the hotkey, type the thought, and return to supervising. Your inbox becomes a trusted collection point that you process during dedicated review sessions, triaging items into your todo lists.
 
 ### API Bridge — claude-code-bridge
 
@@ -181,29 +186,12 @@ This integration means you can delegate a task, switch to another project, and b
 
 ## Quick Start
 
-The core workflow requires only two components: window management and notifications.
+The core workflow requires only two components:
 
-### 1. Install Window Management
+1. **Install [aerospace-setup](https://github.com/tsilva/aerospace-setup)** — Window management with workspaces and keyboard shortcuts
+2. **Install [claude-code-notify](https://github.com/tsilva/claude-code-notify)** — Desktop notifications for Claude Code
 
-```bash
-git clone https://github.com/tsilva/aerospace-setup.git
-cd aerospace-setup
-./install.sh
-```
-
-This installs AeroSpace and configures workspaces with keyboard shortcuts.
-
-### 2. Install Notifications
-
-```bash
-git clone https://github.com/tsilva/claude-code-notify.git
-cd claude-code-notify
-./install.sh
-```
-
-This installs Claude Code hooks for desktop notifications.
-
-### 3. Start Supervising
+Then start supervising:
 
 1. Open Cursor/VS Code windows for each project you want to work on
 2. Press `Alt+C` to auto-arrange Cursor windows across workspaces (one per workspace)
@@ -216,29 +204,15 @@ These components extend the workflow for specific use cases.
 
 ### Sandboxed Execution
 
-Run Claude Code with full autonomy — no permission prompts. Useful when you want Claude to work completely autonomously on isolated tasks.
+Run Claude Code with full autonomy — no permission prompts. Useful when you want Claude to work completely autonomously on isolated tasks. See [claude-sandbox](https://github.com/tsilva/claude-sandbox) for details.
 
-```bash
-git clone https://github.com/tsilva/claude-sandbox.git
-cd claude-sandbox
-./docker/install.sh
-source ~/.zshrc
-claude-sandbox login  # One-time authentication
-```
+### Idea Capture
 
-Then use `claude-sandbox` instead of `claude` in any project. See [claude-sandbox](https://github.com/tsilva/claude-sandbox) for details.
+Capture random thoughts to Gmail without breaking focus. Useful for implementing GTD while supervising multiple projects. See [capture](https://github.com/tsilva/capture) for details.
 
 ### API Bridge for Claude Max
 
-Use your Claude Max subscription instead of per-token API pricing. Useful if you have a Claude Max subscription and want to use Opus 4.5 without per-token costs.
-
-```bash
-uv tool install git+https://github.com/tsilva/claude-code-bridge
-claude login  # If not already authenticated
-claude-code-bridge  # Start the server
-```
-
-Point OpenRouter-based tools to `http://localhost:8000`. See [claude-code-bridge](https://github.com/tsilva/claude-code-bridge) for details.
+Use your Claude Max subscription instead of per-token API pricing. Useful if you have a Claude Max subscription and want to use Opus 4.5 without per-token costs. See [claude-code-bridge](https://github.com/tsilva/claude-code-bridge) for details.
 
 ## Configuration
 
@@ -280,6 +254,7 @@ Projects listed first get lower workspace numbers. See [aerospace-setup](https:/
 - [claude-sandbox](https://github.com/tsilva/claude-sandbox) — Isolated execution environment for Claude Code
 - [claude-code-bridge](https://github.com/tsilva/claude-code-bridge) — OpenAI-compatible API bridge for Claude Max subscriptions
 - [claude-skills](https://github.com/tsilva/claude-skills) — Reusable skills for Claude Code
+- [capture](https://github.com/tsilva/capture) — Instant thought capture to Gmail for GTD workflow
 - [AeroSpace](https://github.com/nikitabobko/AeroSpace) — Tiling window manager for macOS
 
 ## License

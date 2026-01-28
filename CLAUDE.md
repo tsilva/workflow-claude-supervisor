@@ -9,6 +9,7 @@ All code artifacts (scripts, configurations) live in the component repositories:
 - [claude-code-notify](https://github.com/tsilva/claude-code-notify) — Notification system
 - [claude-sandbox](https://github.com/tsilva/claude-sandbox) — Sandboxed execution
 - [claude-code-bridge](https://github.com/tsilva/claude-code-bridge) — API bridge for Claude Max
+- [capture](https://github.com/tsilva/capture) — Instant thought capture to Gmail
 
 ## File Organization
 
@@ -26,6 +27,7 @@ workflow-claude-supervisor/
 - [claude-code-notify](https://github.com/tsilva/claude-code-notify): Notification system for Claude Code task completion
 - [claude-sandbox](https://github.com/tsilva/claude-sandbox): Isolated Docker environment for autonomous Claude Code execution
 - [claude-code-bridge](https://github.com/tsilva/claude-code-bridge): OpenAI-compatible API server for Claude Max subscriptions
+- [capture](https://github.com/tsilva/capture): Instant thought capture to Gmail for GTD workflow
 
 ## Documentation Generation
 
