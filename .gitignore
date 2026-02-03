@@ -62,5 +62,7 @@ build/
 Thumbs.db
 
 # Claude Code
-.claude-sandbox.json
+.claudebox.json
 *.code-workspace
+
+.claude/settings.local.json

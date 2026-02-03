@@ -128,20 +128,20 @@ As you supervise multiple projects, use these skills to maintain consistency and
 - When you identify a repeated task on a project, use `/claude-skill-author` to create a skill so future runs are more efficient
 - When you identify a repeated workflow that could be a tool, use `/mcp-author` to create an MCP server
 
-### Sandboxed Execution — claude-sandbox
+### Sandboxed Execution — claudebox
 
 **Problem:** Permission prompts interrupt your workflow, requiring constant attention.
 
-**Solution:** [claude-sandbox](https://github.com/tsilva/claude-sandbox) runs Claude Code with full autonomy inside an isolated container — no permission prompts, no risk to your system.
+**Solution:** [claudebox](https://github.com/tsilva/claudebox) runs Claude Code with full autonomy inside an isolated container — no permission prompts, no risk to your system.
 
 **Key features:**
 - Full autonomy — Claude can install packages, run commands, modify files without prompts
 - Complete isolation — Container has no access to your host system except mounted project
 - Same-path mounting — File paths work identically inside and outside the container
-- Per-project config — Mount additional data directories via `.claude-sandbox.json`
+- Per-project config — Mount additional data directories via `.claudebox.json`
 
 **Workflow integration:**
-Run `claude-sandbox` instead of `claude` in your project directory. Combined with the supervisor pattern, you can delegate tasks and switch away knowing Claude will work autonomously until completion — no prompts pulling you back.
+Run `claudebox` instead of `claude` in your project directory. Combined with the supervisor pattern, you can delegate tasks and switch away knowing Claude will work autonomously until completion — no prompts pulling you back.
 
 ### Idea Capture — capture
 
@@ -158,11 +158,11 @@ Run `claude-sandbox` instead of `claude` in your project directory. Combined wit
 **Workflow integration:**
 Bind `capture` to a global hotkey (e.g., `Cmd+Shift+I` via Alfred). When a random thought hits while supervising Claude instances — a grocery item, a feature idea for another project, a reminder — press the hotkey, type the thought, and return to supervising. Your inbox becomes a trusted collection point that you process during dedicated review sessions, triaging items into your todo lists.
 
-### API Bridge — claude-code-bridge
+### API Bridge — claudebridge
 
 **Problem:** OpenRouter and other API providers charge per-token, making Opus 4.5 expensive for heavy usage.
 
-**Solution:** [claude-code-bridge](https://github.com/tsilva/claude-code-bridge) creates an OpenAI-compatible API server that bridges to your Claude Max subscription — use Opus 4.5 at subscription cost instead of per-token pricing.
+**Solution:** [claudebridge](https://github.com/tsilva/claudebridge) creates an OpenAI-compatible API server that bridges to your Claude Max subscription — use Opus 4.5 at subscription cost instead of per-token pricing.
 
 **Key features:**
 - OpenAI-compatible — Drop-in replacement for `/v1/chat/completions` endpoint
@@ -180,7 +180,7 @@ The components integrate seamlessly to create a smooth supervisor experience:
 1. **aerospace-setup** provides the workspace infrastructure — each Claude Code instance lives in its own dedicated workspace with instant keyboard switching
 2. **claude-code-notify** hooks into Claude Code events and sends desktop notifications when tasks complete or need input
 3. **Clicking a notification** automatically switches to the correct workspace and focuses the window — no manual navigation needed
-4. **claude-sandbox** (optional) eliminates permission prompts, letting Claude work autonomously until completion
+4. **claudebox** (optional) eliminates permission prompts, letting Claude work autonomously until completion
 
 This integration means you can delegate a task, switch to another project, and be automatically brought back when Claude needs you — all without losing context or hunting for windows.
 
@@ -204,7 +204,7 @@ These components extend the workflow for specific use cases.
 
 ### Sandboxed Execution
 
-Run Claude Code with full autonomy — no permission prompts. Useful when you want Claude to work completely autonomously on isolated tasks. See [claude-sandbox](https://github.com/tsilva/claude-sandbox) for details.
+Run Claude Code with full autonomy — no permission prompts. Useful when you want Claude to work completely autonomously on isolated tasks. See [claudebox](https://github.com/tsilva/claudebox) for details.
 
 ### Idea Capture
 
@@ -212,7 +212,11 @@ Capture random thoughts to Gmail without breaking focus. Useful for implementing
 
 ### API Bridge for Claude Max
 
-Use your Claude Max subscription instead of per-token API pricing. Useful if you have a Claude Max subscription and want to use Opus 4.5 without per-token costs. See [claude-code-bridge](https://github.com/tsilva/claude-code-bridge) for details.
+Use your Claude Max subscription instead of per-token API pricing. Useful if you have a Claude Max subscription and want to use Opus 4.5 without per-token costs. See [claudebridge](https://github.com/tsilva/claudebridge) for details.
+
+### Multi-Repo Status Overview
+
+Get a bird's eye view of all your repositories with [gita](https://github.com/nosarthur/gita). When supervising multiple projects, you need to quickly check git status across repos — which have uncommitted changes, which are behind remote, which branches are active. Gita consolidates this into a single command.
 
 ## Configuration
 
@@ -251,11 +255,12 @@ Projects listed first get lower workspace numbers. See [aerospace-setup](https:/
 
 - [aerospace-setup](https://github.com/tsilva/aerospace-setup) — AeroSpace configuration for the supervisor workflow
 - [claude-code-notify](https://github.com/tsilva/claude-code-notify) — Notifications for Claude Code
-- [claude-sandbox](https://github.com/tsilva/claude-sandbox) — Isolated execution environment for Claude Code
-- [claude-code-bridge](https://github.com/tsilva/claude-code-bridge) — OpenAI-compatible API bridge for Claude Max subscriptions
+- [claudebox](https://github.com/tsilva/claudebox) — Isolated execution environment for Claude Code
+- [claudebridge](https://github.com/tsilva/claudebridge) — OpenAI-compatible API bridge for Claude Max subscriptions
 - [claude-skills](https://github.com/tsilva/claude-skills) — Reusable skills for Claude Code
 - [capture](https://github.com/tsilva/capture) — Instant thought capture to Gmail for GTD workflow
 - [AeroSpace](https://github.com/nikitabobko/AeroSpace) — Tiling window manager for macOS
+- [gita](https://github.com/nosarthur/gita) — Manage multiple git repos
 
 ## License
 
