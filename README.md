@@ -97,11 +97,11 @@ This workflow combines several tools, each solving a specific problem:
 - Auto-arrange script organizes windows by project priority
 - Zero gaps, zero animations, zero distractions
 
-### Notifications — claude-code-notify
+### Notifications — claudepong
 
 **Problem:** You can't watch every Claude Code instance simultaneously.
 
-**Solution:** [claude-code-notify](https://github.com/tsilva/claude-code-notify) sends desktop notifications when Claude needs attention.
+**Solution:** [claudepong](https://github.com/tsilva/claudepong) sends desktop notifications when Claude needs attention.
 
 **Key features:**
 - Alerts when tasks complete ("Ready for input")
@@ -178,7 +178,7 @@ For projects using OpenRouter or other OpenAI-compatible APIs, point them to `ht
 The components integrate seamlessly to create a smooth supervisor experience:
 
 1. **aerospace-setup** provides the workspace infrastructure — each Claude Code instance lives in its own dedicated workspace with instant keyboard switching
-2. **claude-code-notify** hooks into Claude Code events and sends desktop notifications when tasks complete or need input
+2. **claudepong** hooks into Claude Code events and sends desktop notifications when tasks complete or need input
 3. **Clicking a notification** automatically switches to the correct workspace and focuses the window — no manual navigation needed
 4. **claudebox** (optional) eliminates permission prompts, letting Claude work autonomously until completion
 
@@ -189,7 +189,7 @@ This integration means you can delegate a task, switch to another project, and b
 The core workflow requires only two components:
 
 1. **Install [aerospace-setup](https://github.com/tsilva/aerospace-setup)** — Window management with workspaces and keyboard shortcuts
-2. **Install [claude-code-notify](https://github.com/tsilva/claude-code-notify)** — Desktop notifications for Claude Code
+2. **Install [claudepong](https://github.com/tsilva/claudepong)** — Desktop notifications for Claude Code
 
 Then start supervising:
 
@@ -254,7 +254,7 @@ Projects listed first get lower workspace numbers. See [aerospace-setup](https:/
 ## Related
 
 - [aerospace-setup](https://github.com/tsilva/aerospace-setup) — AeroSpace configuration for the supervisor workflow
-- [claude-code-notify](https://github.com/tsilva/claude-code-notify) — Notifications for Claude Code
+- [claudepong](https://github.com/tsilva/claudepong) — Notifications for Claude Code
 - [claudebox](https://github.com/tsilva/claudebox) — Isolated execution environment for Claude Code
 - [claudebridge](https://github.com/tsilva/claudebridge) — OpenAI-compatible API bridge for Claude Max subscriptions
 - [claude-skills](https://github.com/tsilva/claude-skills) — Reusable skills for Claude Code
