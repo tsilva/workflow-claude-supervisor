@@ -7,7 +7,7 @@
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Anthropic-orange)](https://claude.ai/code)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Supervise multiple Claude Code instances in parallel — switch contexts instantly, get notified when tasks complete, stay in control**
+**🎛️ Supervise multiple Claude Code instances in parallel — switch contexts instantly, get notified when tasks complete 🔔**
 
 [Quick Start](#quick-start) · [The Workflow](#the-workflow) · [Components](#components)
 
