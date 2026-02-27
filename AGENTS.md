@@ -43,5 +43,6 @@ To regenerate documentation, use the `/project-readme-author` skill command.
 ## Important Notes
 
 - README.md must be kept up to date with any significant project changes
+- Quick Start installation commands must stay in sync with component repo install procedures
 - This repo contains no executable code — all scripts live in component repos
 - When updating documentation, ensure links to component repos are correct

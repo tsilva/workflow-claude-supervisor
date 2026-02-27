@@ -111,6 +111,9 @@ This workflow combines several tools, each solving a specific problem:
 - Multi-IDE support — works with Claude Code, OpenCode, and other terminal-based agents
 - Zero configuration required
 
+**How it works:**
+The install script configures Claude Code hooks in `~/.claude/settings.json` that trigger on `Stop` (task complete) and `PermissionRequest` (needs approval) events. When either fires, `~/.claude/notify.sh` sends a desktop notification via `terminal-notifier`. Clicking the notification runs `~/.claude/focus-window.sh`, which uses AeroSpace to locate and focus the correct IDE window — even across workspaces.
+
 ### Skills — claude-skills
 
 **Problem:** Repeated documentation, development, and workflow tasks across repos are tedious and inconsistent.
@@ -190,35 +193,118 @@ This integration means you can delegate a task, switch to another project, and b
 
 The core workflow requires only two components:
 
-1. **Install [aerospace-setup](https://github.com/tsilva/aerospace-setup)** — Window management with workspaces and keyboard shortcuts
-2. **Install [agentpong](https://github.com/tsilva/agentpong)** — Desktop notifications for Claude Code
+### 1. Install aerospace-setup
 
-Then start supervising:
+```bash
+brew install nikitabobko/tap/aerospace
+git clone https://github.com/tsilva/aerospace-setup.git
+cd aerospace-setup
+./install.sh
+```
+
+### 2. Install agentpong
+
+```bash
+git clone https://github.com/tsilva/agentpong.git
+cd agentpong
+./install.sh
+```
+
+### 3. Verify the setup
+
+```bash
+# AeroSpace should be running
+aerospace list-workspaces --all
+
+# Hooks should be configured
+grep -q "notify.sh" ~/.claude/settings.json && echo "✓ Hooks configured"
+
+# Test a notification
+~/.claude/notify.sh "Test notification"
+```
+
+### 4. Start supervising
 
 1. Open Cursor/VS Code windows for each project you want to work on
 2. Press `Alt+S` to auto-arrange Cursor windows across workspaces (one per workspace)
 3. Use `Alt+1-9` to switch instantly between projects
 4. Get notified when Claude completes tasks — click the notification or press `Alt+N` to jump back
 
-## Optional Enhancements
+## Example Session
 
-These components extend the workflow for specific use cases.
+Here's a concrete example of supervising three projects in parallel:
+
+**Setup:**
+```bash
+# Define project priorities
+cat > ~/.config/aerospace/cursor-projects.txt << 'EOF'
+my-api-backend
+my-web-frontend
+my-mobile-app
+EOF
+
+# Open each project in Cursor, then arrange them
+# Alt+S auto-assigns: my-api-backend → Alt+2, my-web-frontend → Alt+3, my-mobile-app → Alt+4
+```
+
+**Supervising:**
+1. **Alt+2** — Open Claude Code in my-api-backend: "Add pagination to the /users endpoint"
+2. **Alt+3** — Switch to my-web-frontend: "Update the user list component to handle paginated responses"
+3. **Alt+4** — Switch to my-mobile-app: "Write unit tests for the login flow"
+4. **Desktop notification:** "my-api-backend — Ready for input" — **click** to jump back
+5. **Alt+2** — Review the pagination changes, then: "Now add rate limiting to that endpoint"
+6. **Alt+N** — Another notification pending — jump to my-mobile-app to review tests
+7. Repeat — delegate, switch, review, delegate
+
+## Optional Enhancements
 
 ### Sandboxed Execution
 
-Run Claude Code with full autonomy — no permission prompts. Useful when you want Claude to work completely autonomously on isolated tasks. See [claudebox](https://github.com/tsilva/claudebox) for details.
+**If you want Claude to work without any permission prompts:**
+
+[claudebox](https://github.com/tsilva/claudebox) runs Claude Code inside an isolated Docker container with full autonomy — no permission prompts, no risk to your system.
+
+```bash
+git clone https://github.com/tsilva/claudebox.git
+cd claudebox
+./install.sh
+```
+
+Then use `claudebox` instead of `claude` in any project directory.
 
 ### Idea Capture
 
-Capture random thoughts to Gmail without breaking focus. Useful for implementing GTD while supervising multiple projects. See [capture](https://github.com/tsilva/capture) for details.
+**If random thoughts interrupt your focus while supervising:**
+
+[capture](https://github.com/tsilva/capture) sends thoughts to Gmail instantly. Dump the idea, stay in flow, process later.
+
+```bash
+uv tool install git+https://github.com/tsilva/capture.git
+```
+
+Requires Gmail API setup — see [capture](https://github.com/tsilva/capture) for configuration.
 
 ### API Bridge for Claude Max
 
-Use your Claude Max subscription instead of per-token API pricing. Useful if you have a Claude Max subscription and want to use Opus 4.5 without per-token costs. See [claudebridge](https://github.com/tsilva/claudebridge) for details.
+**If you have a Claude Max subscription and want to avoid per-token API costs:**
+
+[claudebridge](https://github.com/tsilva/claudebridge) creates an OpenAI-compatible API server that bridges to your subscription.
+
+```bash
+git clone https://github.com/tsilva/claudebridge.git
+cd claudebridge
+pip install -r requirements.txt
+```
 
 ### Multi-Repo Status Overview
 
-Get a bird's eye view of all your repositories with [gita](https://github.com/nosarthur/gita). When supervising multiple projects, you need to quickly check git status across repos — which have uncommitted changes, which are behind remote, which branches are active. Gita consolidates this into a single command.
+**If you need a bird's eye view of git status across all your projects:**
+
+[gita](https://github.com/nosarthur/gita) consolidates git status, branches, and remote sync state into a single command.
+
+```bash
+pip install gita
+```
 
 ## Configuration
 
@@ -236,16 +322,18 @@ Projects listed first get lower workspace numbers. See [aerospace-setup](https:/
 
 ## Keybindings
 
-| Keybinding | Action |
-|------------|--------|
-| `Alt+1` - `Alt+9` | Switch to workspace |
-| `Alt+Shift+1` - `Alt+Shift+9` | Move window to workspace |
-| `Alt+S` | Auto-arrange Cursor windows by priority (Cursor-specific) |
-| `Alt+P` | Switch between projects (Alfred) |
-| `Alt+N` | Jump to next notification (agentpong) |
-| `Alt+C` | Quick capture to Gmail |
-| `Alt+F` | Toggle fullscreen |
-| `Alt+Left` / `Alt+Right` | Navigate to adjacent workspace |
+| Keybinding | Action | Provided by |
+|------------|--------|-------------|
+| `Alt+1` - `Alt+9` | Switch to workspace | aerospace-setup |
+| `Alt+Shift+1` - `Alt+Shift+9` | Move window to workspace | aerospace-setup |
+| `Alt+S` | Auto-arrange Cursor windows by priority | aerospace-setup |
+| `Alt+P` | Switch between projects (Alfred) | aerospace-setup |
+| `Alt+N` | Jump to next notification | agentpong |
+| `Alt+C` | Quick capture to Gmail | capture |
+| `Alt+F` | Toggle fullscreen | aerospace-setup |
+| `Alt+Left` / `Alt+Right` | Navigate to adjacent workspace | aerospace-setup |
+
+> **Note:** `Alt+N` and `Alt+C` keybindings are automatically enabled when aerospace-setup detects agentpong and capture during installation.
 
 > **Note:** `Alt+S` specifically arranges Cursor windows. If you use VS Code instead, see [aerospace-setup](https://github.com/tsilva/aerospace-setup) for configuration options.
 
@@ -255,6 +343,28 @@ Projects listed first get lower workspace numbers. See [aerospace-setup](https:/
 - **[Homebrew](https://brew.sh)** — For installing AeroSpace and dependencies
 - **[Claude Code](https://docs.anthropic.com/en/docs/claude-code)** — Anthropic's CLI for Claude
 - **[Cursor](https://cursor.sh) or VS Code** — As your editor (Claude Code runs in the integrated terminal)
+
+## Troubleshooting
+
+**Workspace switching feels slow or animated**
+Disable macOS window animations: System Settings → Accessibility → Display → Reduce motion. AeroSpace bypasses Spaces animations, but some system animations may still apply.
+
+**Notifications not appearing**
+1. Verify `terminal-notifier` is installed: `which terminal-notifier`
+2. Check hooks are configured: `grep "notify.sh" ~/.claude/settings.json`
+3. Check notification permissions: System Settings → Notifications → terminal-notifier → Allow Notifications
+4. Test manually: `~/.claude/notify.sh "Test"`
+
+**Notification click doesn't switch to the correct workspace**
+1. Verify AeroSpace is running: `aerospace list-workspaces --all`
+2. Grant Accessibility permissions: System Settings → Privacy & Security → Accessibility → AeroSpace
+
+**Alt+S doesn't arrange windows**
+1. Ensure `~/.config/aerospace/cursor-projects.txt` exists and lists your projects
+2. This keybinding is Cursor-specific — see [aerospace-setup](https://github.com/tsilva/aerospace-setup) for VS Code configuration
+
+**Hooks don't fire in standalone terminals**
+Claude Code hooks only fire in IDE-integrated terminals (Cursor, VS Code). For standalone terminals like iTerm2, use the iTerm Triggers workaround — see [agentpong](https://github.com/tsilva/agentpong) for setup instructions.
 
 ## Related
 
