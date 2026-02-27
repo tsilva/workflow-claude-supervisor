@@ -97,16 +97,18 @@ This workflow combines several tools, each solving a specific problem:
 - Auto-arrange script organizes windows by project priority
 - Zero gaps, zero animations, zero distractions
 
-### Notifications — claudepong
+### Notifications — agentpong
 
 **Problem:** You can't watch every Claude Code instance simultaneously.
 
-**Solution:** [claudepong](https://github.com/tsilva/claudepong) sends desktop notifications when Claude needs attention.
+**Solution:** [agentpong](https://github.com/tsilva/agentpong) sends desktop notifications when Claude needs attention.
 
 **Key features:**
 - Alerts when tasks complete ("Ready for input")
 - Alerts when permission is needed
 - Click notification to focus the correct window (even across workspaces)
+- Notification cycling with `Alt+N` — jump to next pending notification without clicking
+- Multi-IDE support — works with Claude Code, OpenCode, and other terminal-based agents
 - Zero configuration required
 
 ### Skills — claude-skills
@@ -178,8 +180,8 @@ For projects using OpenRouter or other OpenAI-compatible APIs, point them to `ht
 The components integrate seamlessly to create a smooth supervisor experience:
 
 1. **aerospace-setup** provides the workspace infrastructure — each Claude Code instance lives in its own dedicated workspace with instant keyboard switching
-2. **claudepong** hooks into Claude Code events and sends desktop notifications when tasks complete or need input
-3. **Clicking a notification** automatically switches to the correct workspace and focuses the window — no manual navigation needed
+2. **agentpong** hooks into Claude Code events and sends desktop notifications when tasks complete or need input
+3. **Clicking a notification** automatically switches to the correct workspace and focuses the window — or press `Alt+N` to cycle through pending notifications without reaching for the mouse
 4. **claudebox** (optional) eliminates permission prompts, letting Claude work autonomously until completion
 
 This integration means you can delegate a task, switch to another project, and be automatically brought back when Claude needs you — all without losing context or hunting for windows.
@@ -189,14 +191,14 @@ This integration means you can delegate a task, switch to another project, and b
 The core workflow requires only two components:
 
 1. **Install [aerospace-setup](https://github.com/tsilva/aerospace-setup)** — Window management with workspaces and keyboard shortcuts
-2. **Install [claudepong](https://github.com/tsilva/claudepong)** — Desktop notifications for Claude Code
+2. **Install [agentpong](https://github.com/tsilva/agentpong)** — Desktop notifications for Claude Code
 
 Then start supervising:
 
 1. Open Cursor/VS Code windows for each project you want to work on
-2. Press `Alt+C` to auto-arrange Cursor windows across workspaces (one per workspace)
+2. Press `Alt+S` to auto-arrange Cursor windows across workspaces (one per workspace)
 3. Use `Alt+1-9` to switch instantly between projects
-4. Get notified when Claude completes tasks — click the notification to jump back
+4. Get notified when Claude completes tasks — click the notification or press `Alt+N` to jump back
 
 ## Optional Enhancements
 
@@ -238,11 +240,14 @@ Projects listed first get lower workspace numbers. See [aerospace-setup](https:/
 |------------|--------|
 | `Alt+1` - `Alt+9` | Switch to workspace |
 | `Alt+Shift+1` - `Alt+Shift+9` | Move window to workspace |
-| `Alt+C` | Auto-arrange Cursor windows by priority (Cursor-specific) |
+| `Alt+S` | Auto-arrange Cursor windows by priority (Cursor-specific) |
+| `Alt+P` | Switch between projects (Alfred) |
+| `Alt+N` | Jump to next notification (agentpong) |
+| `Alt+C` | Quick capture to Gmail |
 | `Alt+F` | Toggle fullscreen |
 | `Alt+Left` / `Alt+Right` | Navigate to adjacent workspace |
 
-> **Note:** `Alt+C` specifically arranges Cursor windows. If you use VS Code instead, see [aerospace-setup](https://github.com/tsilva/aerospace-setup) for configuration options.
+> **Note:** `Alt+S` specifically arranges Cursor windows. If you use VS Code instead, see [aerospace-setup](https://github.com/tsilva/aerospace-setup) for configuration options.
 
 ## Requirements
 
@@ -254,7 +259,7 @@ Projects listed first get lower workspace numbers. See [aerospace-setup](https:/
 ## Related
 
 - [aerospace-setup](https://github.com/tsilva/aerospace-setup) — AeroSpace configuration for the supervisor workflow
-- [claudepong](https://github.com/tsilva/claudepong) — Notifications for Claude Code
+- [agentpong](https://github.com/tsilva/agentpong) — Notifications for Claude Code
 - [claudebox](https://github.com/tsilva/claudebox) — Isolated execution environment for Claude Code
 - [claudebridge](https://github.com/tsilva/claudebridge) — OpenAI-compatible API bridge for Claude Max subscriptions
 - [claude-skills](https://github.com/tsilva/claude-skills) — Reusable skills for Claude Code

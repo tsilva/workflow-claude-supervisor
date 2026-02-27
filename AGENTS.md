@@ -6,7 +6,7 @@ This is a **documentation-only repository** that describes the optimal multi-ins
 
 All code artifacts (scripts, configurations) live in the component repositories:
 - [aerospace-setup](https://github.com/tsilva/aerospace-setup) — Window management configuration
-- [claudepong](https://github.com/tsilva/claudepong) — Notification system
+- [agentpong](https://github.com/tsilva/agentpong) — Notification system
 - [claudebox](https://github.com/tsilva/claudebox) — Sandboxed execution
 - [claudebridge](https://github.com/tsilva/claudebridge) — API bridge for Claude Max
 - [capture](https://github.com/tsilva/capture) — Instant thought capture to Gmail
@@ -24,7 +24,7 @@ workflow-claude-supervisor/
 ## Related Projects
 
 - [aerospace-setup](https://github.com/tsilva/aerospace-setup): AeroSpace configuration with workspaces and keybindings
-- [claudepong](https://github.com/tsilva/claudepong): Notification system for Claude Code task completion
+- [agentpong](https://github.com/tsilva/agentpong): Notification system for Claude Code task completion
 - [claudebox](https://github.com/tsilva/claudebox): Isolated Docker environment for autonomous Claude Code execution
 - [claudebridge](https://github.com/tsilva/claudebridge): OpenAI-compatible API server for Claude Max subscriptions
 - [capture](https://github.com/tsilva/capture): Instant thought capture to Gmail for GTD workflow
