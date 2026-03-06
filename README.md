@@ -1,3 +1,9 @@
+> [!WARNING]
+> ## Archived
+> This project is archived and no longer maintained.
+>
+> The workflow described here has been merged into [agentpong](https://github.com/tsilva/agentpong), which now serves as the central hub for orchestrating multiple Claude Code instances in parallel. Head there for the latest setup instructions and documentation.
+
 <div align="center">
   <img src="logo.png" alt="workflow-claude-supervisor" width="512"/>
 
